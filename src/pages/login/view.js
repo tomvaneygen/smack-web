@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { reduxForm } from 'redux-form';
 import { submit } from './actions';
-import { loginStyle, colors } from '../../constants/styles';
+import { colors } from '../../constants/styles';
 import styled from 'styled-components';
 
 const logo = require('./smackLogo.svg');
@@ -73,7 +73,6 @@ export default class LoginForm extends Component {
     dispatch(submit(values));
   }
   render () {
-    const styles = loginStyle;
     const { fields: { username }, handleSubmit, submitting } = this.props;
 
     return (

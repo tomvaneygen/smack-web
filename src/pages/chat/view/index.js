@@ -9,6 +9,16 @@ import Sidebar from './sidebar';
 import * as actions from '../actions';
 import selector from '../selector';
 import { chatStyle } from '../../../constants/styles';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  display: flex;
+`;
+
+const ChatContainer = styled.div`
+  width: 100%;
+`;
+
 
 @connect(selector, (dispatch) => ({
   logout: bindActionCreators(actions.logout, dispatch),
@@ -50,7 +60,7 @@ export default class Chat extends Component {
     }
 
     return (
-      <div style={styles.container}>
+      <Container>
         <Sidebar
           channels={channels}
           currentChannel={currentChannel}
@@ -59,7 +69,7 @@ export default class Chat extends Component {
           users={users}
           onClickChannel={selectChannel}
           onClickUser={selectUser} />
-        <div style={styles.chatContainer}>
+        <ChatContainer>
           <Header
             currentChannel={currentChannel}
             currentUser={currentUser}
@@ -70,8 +80,8 @@ export default class Chat extends Component {
             myUser={myUser}
             style={styles.messages}
             onSendMessage={sendMessage} />
-          </div>
-      </div>
+          </ChatContainer>
+      </Container>
     );
   }
 

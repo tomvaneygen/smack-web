@@ -2,7 +2,27 @@ import React, { Component, PropTypes } from 'react';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import Channel from './channel';
 import User from './user';
-import { sidebarStyle } from '../../../../constants/styles';
+import { colors } from '../../../../constants/styles';
+import styled from 'styled-components';
+
+const Search = styled.div`
+  background-color: ${colors.darkPurple};
+  color: ${colors.white};
+  font-size: 20px;
+  height: 80px;
+  padding: 28px 20px;
+  width: 280px;
+`;
+
+const List = styled.ul`
+  bottom: 0;
+  margin: 0;
+  overflowY: scroll;
+  padding: 0;
+  position: absolute;
+  top: 80px;
+  width: 280px;
+`;
 
 export default class Sidebar extends Component {
 
@@ -17,7 +37,6 @@ export default class Sidebar extends Component {
   };
 
   render () {
-    const styles = sidebarStyle;
     const {
       channels, currentChannel, currentUser, style, users,
       onClickChannel, onClickUser
@@ -25,10 +44,10 @@ export default class Sidebar extends Component {
 
     return (
       <div style={style}>
-        <div style={styles.search}>
+        <Search>
           Conversations
-        </div>
-        <ul style={styles.list}>
+        </Search>
+        <List>
           {channels.map((channel) => (
             <Channel
               channel={channel}
@@ -43,7 +62,7 @@ export default class Sidebar extends Component {
               user={user}
               onClickUser={onClickUser} />
           ))}
-        </ul>
+        </List>
       </div>
     );
   }

@@ -1,7 +1,45 @@
 import React, { Component, PropTypes } from 'react';
 import Radium from 'radium';
 import { reduxForm } from 'redux-form';
-import { sendMessageStyle } from '../../../constants/styles';
+import { colors } from '../../../constants/styles';
+import styled from 'styled-components';
+
+const Container = styled.form`
+  display: flex;
+  font-size: 16px;
+`;
+
+const Input = styled.input`
+  border-radius: 6px;
+  color: ${colors.darkGrey};
+  width: 100%;
+  height: 40px;
+  display: inline-block;
+  padding: 10px 70px 10px 18px;
+`;
+
+const Button = styled.button`
+  color: ${colors.darkPurple};
+  height: 40px;
+  margin-left: -70px;
+  padding: 0 16px 0 16px;
+  position: absolute;
+`;
+
+const Div = styled.div`
+  backgroundColor: ${colors.lightGrey};
+  borderTop: 1px solid ${colors.grey};
+  bottom: 0;
+  height: 80px;
+  left: 280px;
+  padding: 20px;
+  position: absolute;
+  right: 0;
+`;
+
+
+
+
 
 @reduxForm({
   fields: [ 'message', 'userId' ],
@@ -22,16 +60,15 @@ export default class SendMessage extends Component {
   };
 
   render () {
-    const styles = sendMessageStyle;
     const { fields: { message }, handleSubmit, style, submitting } = this.props;
 
     return (
-      <div style={style}>
-        <form style={styles.container} onSubmit={handleSubmit}>
-          <input {...message} autoComplete='off' placeholder='Write something...' style={styles.input} type='text' />
-          <button disabled={submitting} style={styles.button} type='submit'>Send</button>
-        </form>
-      </div>
+      <Div>
+        <Container onSubmit={handleSubmit}>
+          <Input {...message} autoComplete='off' placeholder='Write something...' type='text' />
+          <Button disabled={submitting} type='submit'>Send</Button>
+        </Container>
+      </Div>
     );
   }
 }
