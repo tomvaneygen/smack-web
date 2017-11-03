@@ -24,6 +24,10 @@ const List = styled.ul`
   width: 280px;
 `;
 
+const SidebarContainer = styled.div`
+  width: 280px;
+`;
+
 export default class Sidebar extends Component {
 
   static propTypes = {
@@ -38,12 +42,12 @@ export default class Sidebar extends Component {
 
   render () {
     const {
-      channels, currentChannel, currentUser, style, users,
+      channels, currentChannel, currentUser, users,
       onClickChannel, onClickUser
     } = this.props;
 
     return (
-      <div style={style}>
+      <SidebarContainer>
         <Search>
           Conversations
         </Search>
@@ -63,7 +67,7 @@ export default class Sidebar extends Component {
               onClickUser={onClickUser} />
           ))}
         </List>
-      </div>
+      </SidebarContainer>
     );
   }
 

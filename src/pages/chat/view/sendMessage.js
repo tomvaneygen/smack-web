@@ -37,10 +37,6 @@ const Div = styled.div`
   right: 0;
 `;
 
-
-
-
-
 @reduxForm({
   fields: [ 'message', 'userId' ],
   form: 'messageForm',
@@ -60,7 +56,7 @@ export default class SendMessage extends Component {
   };
 
   render () {
-    const { fields: { message }, handleSubmit, style, submitting } = this.props;
+    const { fields: { message }, handleSubmit, submitting } = this.props;
 
     return (
       <Div>

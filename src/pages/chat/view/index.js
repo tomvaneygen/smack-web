@@ -8,7 +8,6 @@ import Messages from './messages';
 import Sidebar from './sidebar';
 import * as actions from '../actions';
 import selector from '../selector';
-import { chatStyle } from '../../../constants/styles';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -18,7 +17,6 @@ const Container = styled.div`
 const ChatContainer = styled.div`
   width: 100%;
 `;
-
 
 @connect(selector, (dispatch) => ({
   logout: bindActionCreators(actions.logout, dispatch),
@@ -51,7 +49,6 @@ export default class Chat extends Component {
   }
 
   render () {
-    const styles = chatStyle;
     const { channels, currentChannel, currentUser, logout, messages, myUser, selectChannel, selectUser, sendMessage, users } = this.props;
 
     if (!myUser) {
@@ -65,7 +62,6 @@ export default class Chat extends Component {
           channels={channels}
           currentChannel={currentChannel}
           currentUser={currentUser}
-          style={styles.sidebar}
           users={users}
           onClickChannel={selectChannel}
           onClickUser={selectUser} />
@@ -78,7 +74,6 @@ export default class Chat extends Component {
           <Messages
             messages={messages}
             myUser={myUser}
-            style={styles.messages}
             onSendMessage={sendMessage} />
           </ChatContainer>
       </Container>

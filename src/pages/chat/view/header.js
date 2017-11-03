@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react';
-import Radium from 'radium';
 import ImmutablePropTypes from 'react-immutable-proptypes';
-import { sidebarItemStyle, colors } from '../../../constants/styles';
-import styled from 'styled-components';
+import { colors, channelIcon } from '../../../constants/styles';
+import styled, { css } from 'styled-components';
 
 const logoutIcon = require('./logoutIcon.svg');
 
-const Container = styled.div`
+const HeaderContainer = styled.div`
   background-color: ${colors.lightGrey};
   display: flex;
   height: 80px;
@@ -33,10 +32,41 @@ const Username = styled.span`
   margin-right: 14px;
 `;
 
+const IconCSS = css`
+  align-items: center;
+  border: solid 1px ${colors.grey};
+  border-radius: 50%;
+  display: flex;
+  flex: 0 0 40px;
+  height: 40px;
+  justify-content: center;
+  margin-right: 20px;
+  width: 40px;
+`;
 
-@Radium
+const channelIconCSS = css`
+  background-image: url('${channelIcon}');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 20px 20px;
+`;
+
+const LetterIconCSS = css`
+  color: ${colors.darkPurple};
+  font-size: 26px;
+`;
+
+const ChannelIcon = styled.div`
+  ${IconCSS}
+  ${channelIconCSS}
+`;
+
+const LetterIcon = styled.div`
+  ${IconCSS}
+  ${LetterIconCSS}
+`;
+
 export default class Header extends Component {
-
   static propTypes = {
     currentChannel: ImmutablePropTypes.map,
     currentUser: ImmutablePropTypes.map,
@@ -56,19 +86,18 @@ export default class Header extends Component {
 
   render () {
     const { currentChannel, currentUser, myUser } = this.props;
-
     return (
-      <Container>
+      <HeaderContainer>
         <div>
-          {currentChannel && <div style={[ sidebarItemStyle.icon, sidebarItemStyle.channelIcon ]}></div>}
-          {currentUser && <div style={[ sidebarItemStyle.icon, sidebarItemStyle.letterIcon ]}>{currentUser.get('username').charAt(0).toUpperCase()}</div>}
+          {currentChannel && <ChannelIcon />}
+          {currentUser && <LetterIcon>{currentUser.get('username').charAt(0).toUpperCase()}</LetterIcon>}
         </div>
         <Title>{currentChannel ? currentChannel.get('name') : currentUser.get('username')}</Title>
         <Right>
           <Username>{myUser.get('username')}</Username>
           <button onClick={this.onLogoutClick}><img alt='Logout' src={logoutIcon} title='Logout'/></button>
         </Right>
-      </Container>
+      </HeaderContainer>
     );
   }
 

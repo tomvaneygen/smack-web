@@ -1,4 +1,4 @@
-const channelIcon = require('./channelIcon.svg');
+export const channelIcon = require('./channelIcon.svg');
 
 export const colors = {
   darkGrey: '#4b4b50',
